@@ -1,0 +1,15 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my (%fname, $name);
+
+%fname = (
+	Rodrigo => 'Adolfo',
+	"Yshiel Ann" => 'Barillo',
+	Abby => 'Barcenas',
+	);
+
+say "Type your name:";
+chomp($name=<STDIN>);
+print "Your family name is $fname{$name}.";

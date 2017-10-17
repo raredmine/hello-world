@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+use strict;
+
+print "Enter some lines, then press Ctrl-D:\n"; # or Ctrl-Z
+chomp(my @lines = <STDIN>);
+print "1234567890" x 6, "12345\n"; # ruler line to column 75
+print "Input the size of Width you want: ";
+chomp(my $width = <STDIN>);
+
+foreach (@lines) {
+	printf "%${width}s\n", $_;
+}
+
+#while (<<>>) {
+#chomp;
+#print "It was $_ that I saw!\n";
+#}

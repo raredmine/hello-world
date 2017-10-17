@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+use strict;
+
+my $selected_output = 'my_output';
+open LOG, '<:encoding(UTF-8)', $selected_output;
+
+#print LOG "Testing Again\n";
+while (<LOG>) {
+	chomp;
+	if (/^Testing/) {
+		print "Success\n";
+	}
+}
+close LOG;

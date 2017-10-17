@@ -1,0 +1,53 @@
+#!/usr/bin/perl -w
+use strict;
+
+print "Please input names per line, then press Ctrl+D to finist the names of list: ";
+chomp(my @names = <STDIN>);
+
+my @sort = sort @names;
+
+foreach (@sort) {
+	print "$_ \n";
+}
+my @fred = qw{ 1 3 5 7 9 };
+my $fred_total = total(@fred);
+print "The total of \@fred is $fred_total.\n";
+
+my $totals = total(1..1000);
+print "The total of 1 to 1000 is $totals.\n";
+print "Enter some numbers on separate lines: ";
+my $user_total = total(<STDIN>);
+print "The total of those numbers is $user_total.\n";
+
+sub total {
+	my $sum;
+	foreach (@_) {
+	  $sum += $_; 
+	}
+	$sum;
+}
+
+
+@fred = above_average(1..10);
+print "\@fred is @fred\n";
+print "(Should be 6 7 8 9 10)\n";
+my @barney = above_average(100, 1..10);
+print "\@barney is @barney\n";
+print "(Should be just 100)\n";
+
+sub average {
+if (@_ == 0) { return }
+my $count = @_;
+my $sum = total(@_); # from earlier exercise
+$sum/$count;
+}
+sub above_average {
+my $average = average(@_);
+my @list;
+foreach my $element (@_) {
+	if ($element > $average) {
+push @list, $element;
+}
+}
+@list;
+}

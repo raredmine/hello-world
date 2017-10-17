@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my %hash = ( 
+	Rodrigo => 'Yshiel',
+	Adolfo => 'Barcenas',
+	Jr => 'Barillo',
+	);
+
+while ( my ($keys,$values) = each %hash) {
+	print "$keys => $values\n";
+}
+print "PATH is $ENV{HOME} $ENV{HOSTNAME}\n";

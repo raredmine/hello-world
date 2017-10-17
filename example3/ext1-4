@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my(@words, %count, $word);
+
+say "Type a name per line, press Ctrl-D to end the line.";
+
+chomp(@words=<STDIN>);
+
+foreach $word (@words) {
+	$count{$word}+=1;
+}
+
+foreach $word (keys %count) {
+	print "$word was seen $count{$word} times.\n";
+}
+

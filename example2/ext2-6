@@ -1,0 +1,20 @@
+#!/usr/bin/perl -w
+use strict;
+
+my ($a,$b,$c) = (100, 200, 300);
+my $total;
+
+sub Compute {
+	foreach (@_) {
+		$total+=$_;
+	}
+	$total;
+}
+
+my $compute = Compute($a,$b,$c);
+
+print "$compute\n";
+
+print "Please input the list of the number you want to add, then press Ctrl-D to end.";
+print &Compute(<STDIN>);
+		

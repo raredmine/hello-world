@@ -1,0 +1,57 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my ($name, $age, $gender);
+
+say "Type your name: ";
+chomp($name = <STDIN>);
+
+say "Type your age: ";
+chomp($age = <STDIN>);
+
+say "Type your gender: ";
+chomp($gender = <STDIN>);
+
+print "We're happy that you are here $name\n";
+
+if($age>=0 && $age<=3){
+	print "You're in the stage of Infancy.\n";
+}	
+elsif($age>3 && $age<6){
+	print "You're in the stage of Early Childhood.\n";
+}	
+elsif($age>6 && $age<=8) {
+	print "You're in the stage of Middle Childhood.\n";
+}
+elsif($age>=9 && $age<=11) {
+	print "You're in the stage of Late Childhood.\n";
+}
+elsif($age>=12 && $age<=20) {
+	print "You're in the stage of Adolescence.\n";
+}
+elsif($age>20 && $age<=35) {
+	print "Your're in the stage of Early Adulthood.\n";
+}
+elsif($age>35 && $age<=50){
+	print "You're in the stage of Midlife.\n";
+}
+elsif($age>50 && $age<=80){
+	print "You're in the Mature Adulthood.\n";
+}
+elsif ($age>80) {
+	print "You're in the Late Adulthood.\n";
+}
+else {
+	print "Please try again";
+}
+
+if($gender eq 'M' or $gender eq 'm') {
+	print "You're Son's of God.";
+}
+elsif($gender eq 'F' or $gender eq 'f')  {
+	print "You're Daugther of God.";
+}
+else {
+	print "Please input only 'F' or 'f' for Female and 'M' or 'm' for Male.";
+}

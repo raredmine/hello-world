@@ -1,0 +1,74 @@
+#!/usr/bin/perl 
+use strict;
+
+print 'What is your name: ';
+my $name=<STDIN>;
+my $x;
+my $num1;
+my $num2;
+my $num;
+
+sub CheckDigit {
+        $x=shift;
+	$x+=0;
+	if ( $x==0 ) {
+        return $x;
+        }
+        else{
+        return $x;
+}
+}
+
+print "Input your first number: ";
+	$num1=<STDIN>;
+	CheckDigit($num1);
+while ($x==0) {
+print "Your input is not a number, please try again:";
+	$x=1;
+	$num1=<STDIN>;
+	CheckDigit($num1);
+}
+print "Input your second number: ";
+	$num2=<STDIN>;
+	CheckDigit($num2);
+while ($x==0) {
+print "Your input is not a number, please try again:";
+	$x=1;
+        $num2=<STDIN>;
+	CheckDigit($num2);
+}
+
+my $dec1=length($num1);
+my $dec2=length($num2);
+my $total;
+my $names=length($name);
+#print $names;
+
+if ($dec1>2 && $dec2>2) {
+        $total=$num1-$num2;
+}elsif($dec1=2 && $dec2=2){
+        $total=$num1*$num2;
+}elsif($dec1>$dec2){
+        $total=$num1/$num2;
+}else {
+        $total=$num1+$num2;
+}
+
+$num=0;
+
+print "Your name will be print times the number of $total\n";
+print $name x $total;
+print "The total answered of two numbers is $total\n";
+print "Below is the decremental number from $total to $num\n";
+
+my @arr1;
+while ($num<=$total) {
+        print "$total\n";
+        push(@arr1,$total);
+        $total--;
+}
+
+foreach(@arr1) {
+        print "Welcome to Perl Language $name";
+}
+

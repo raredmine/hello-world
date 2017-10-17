@@ -1,0 +1,9 @@
+#!/usr/bin/perl -w
+use strict;
+#use 5.010;
+
+@ARGV = qw# larry moe curly #; # force these three files to be read
+foreach (<>) {
+chomp;
+print "It was $ARGV that I saw in some stooge-like file!\n";
+}

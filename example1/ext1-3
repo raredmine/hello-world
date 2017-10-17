@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+use strict;
+
+print "Please input your Super Hero List:";
+chomp(my @hero = <STDIN>);
+my @reverse = reverse @hero;
+
+foreach (@reverse) {
+	print "$_ \n";
+}
+
+print "\nPlease input number from 1-7, one per line, then press Ctrl-D:\n";
+my @name = qw(fred betty barney dino wilma pebbles bamm-bamm);
+chomp(my @num=<STDIN>);
+foreach (@num) {
+	my $size = length($_);
+	if ($size > 2) {
+		print "The number you input is two digit or more than.\n";
+	}
+	elsif ($_ > 7) {
+                print "The number you input is one digit but greater than 7 the last option number.\n";
+	}
+	else {
+		 print "$name[$_ - 1] \n";
+	}
+
+}

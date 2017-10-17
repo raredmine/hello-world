@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my %name = (
+	Rodrigo => 'Adolfo',
+	"Yshiel Ann" => 'Barcenas',
+	Abby => 'Barillo',
+		);
+
+say "Type your name, with Capital the Initial.";
+chomp(my $input=<STDIN>);
+
+print "Your full name is $input $name{$input}";
+#while( my ($keys,$values) = each %name){
+#	print "$name{$input}";
+#}

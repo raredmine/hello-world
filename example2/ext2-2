@@ -1,0 +1,51 @@
+#!/usr/bin/perl -w
+use strict;
+my $sum;
+
+@ARGV = qw# larry moe curly #; # force these three files to be read
+while (<>) {
+chomp;
+print "It was $_ that I saw in some stooge-like file!\n";
+}
+
+my @names = qw { 
+		Rodrigo
+		Adolfo
+		Junior
+	    };
+my @reverse = reverse @names;
+
+my @name = qw { Yshiel Ann Barcenas Barillo };
+
+push @names, @name;
+
+my @sorts = sort @names;
+
+sub prints {
+	foreach (@_) {
+        	print "$_ \n";
+	}
+}
+
+prints(@reverse);
+prints(@sorts);
+
+print ((2+3)*4);
+print @sorts;
+print "@sorts\n";
+
+my @fred = qw{ 1 3 5 7 9 };
+my $fred_total = total(@fred);
+print "\nThe total of \@fred is $fred_total.\n";
+print "Enter some numbers on separate lines: ";
+my $user_total = total(<STDIN>);
+print "The total of those numbers is $user_total.\n";
+
+sub total {
+	foreach(@_) {
+		$sum+=$_;
+		}
+	$sum;
+}
+
+

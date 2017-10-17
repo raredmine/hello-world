@@ -1,0 +1,15 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my $long=0;
+
+foreach my $env (keys %ENV) {
+	my $env_len = length($env);
+	$long=$env_len if $env_len > $long;
+}
+
+foreach my $env (keys %ENV) {
+	printf "%-${long}s %s\n", $env, $ENV{$env};
+}
+
