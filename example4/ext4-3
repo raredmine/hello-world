@@ -1,0 +1,13 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+while(<>) {
+	if (/[A-Z][a-z]+/){ #Print only caps char does not in the last. example: Adolfo, aDolfo. All caps and all small char will not print also.
+		print;
+	}elsif (/(\S)\1/) { #Print the non-whitespace with the same char
+		print;
+	}elsif (/wilma.*fred|fred.*wilma/) {
+		print;
+	}	
+}
