@@ -1,0 +1,8 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+$_ = "I saw Barney\ndown at the bowling alley\nwith Fred\nlast night.\n";
+if (/Barney.*Fred/s) {
+print "That string mentions Fred after Barney!\n";
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+#use feature qw(say);
+
+our $foo = 'This is the value of $foo';
+
+say '$foo: ' . $foo;
+say '$main::foo ' . $main'foo;
+say "\$main'foo: " . $main'foo;;
+
+say "\nSwitching to package Bar";
+package Bar;
+
+our $foo = 'This is in package Bar';
+
+say '$foo: ' . $foo;
+say '$bar::foo ' . $Bar'foo;
+
+say "\nSwitching to package main again";
+package main;
+
+say '$foo: ' . $foo;
+
+$_ = "This is a wilma line\n
+barney is on another line\n
+but this ends in fred \n
+and a final dino line";
+
+if (/^\w/m) {
+	print "Success";
+}else {
+	print $_;
+}
