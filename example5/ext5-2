@@ -1,0 +1,41 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my ($ip, $sub_mask, $octet, $num, $match, $bit, $last);
+ 
+say "Input the Network address:";
+$ip =<STDIN>;
+$match =  '(\d+)(.)(\d+)(.)(\d+)(.)(\d+)\/(\d+)';
+
+if ( $ip =~ m/$match/ ) {
+	 $num = $8 / 8;
+	if ( $num <= 32 ) { 
+		if ( $num =~ /(\d)(.)(\d+)/ ) {
+			$octet = $1;
+			if ( $3 == 875 ) { $bit = 1;}
+			if ( $3 == 75 ) { $bit = 2;}
+			if ( $3 == 625 ) { $bit = 3;}
+			if ( $3 == 75 ) { $bit = 4;}
+			if ( $3 == 375 ) { $bit = 5;}
+                        if ( $3 == 25 ) { $bit = 6;}
+                        if ( $3 == 125 ) { $bit = 7;}
+		}
+	}
+}
+
+if ($octet == 1) { 
+	$last = total($bit);
+	$sub_mask = "255.$last.0.0";
+}
+if ($octet == 2) {
+	$last = total($bit);
+       	$sub_mask = "255.255.$last.0";}
+if ($octet == 3) { 
+	$last = total($bit);
+	$sub_mask = "255.255.255.$last";}
+
+sub total {
+	my $total_bits = $bit ** 2;
+}
+print $sub_mask;
