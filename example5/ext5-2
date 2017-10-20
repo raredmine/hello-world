@@ -2,40 +2,53 @@
 use strict;
 use 5.010;
 
-my ($ip, $sub_mask, $octet, $num, $match, $bit, $last);
+my ($ip, $sub_mask, $octet, $num, $match, $total_bits, $bit, $last);
  
 say "Input the Network address:";
 $ip =<STDIN>;
-$match =  '(\d+)(.)(\d+)(.)(\d+)(.)(\d+)\/(\d+)';
+$match =  '(\d+)(.)(\d+)(.)(\d+)(.)(\d+)';
 
-if ( $ip =~ m/$match/ ) {
+if ($ip =~ m/$match\/(\d+)/) {
 	 $num = $8 / 8;
-	if ( $num <= 32 ) { 
+	if ( $num >= 8 || $num <= 32 ) { 
 		if ( $num =~ /(\d)(.)(\d+)/ ) {
 			$octet = $1;
-			if ( $3 == 875 ) { $bit = 1;}
-			if ( $3 == 75 ) { $bit = 2;}
-			if ( $3 == 625 ) { $bit = 3;}
-			if ( $3 == 75 ) { $bit = 4;}
-			if ( $3 == 375 ) { $bit = 5;}
-                        if ( $3 == 25 ) { $bit = 6;}
-                        if ( $3 == 125 ) { $bit = 7;}
+			if ( $3 == 875 ) { octet_($bit = 2);}
+			if ( $3 == 75 ) { octet_($bit = 4);}
+			if ( $3 == 625 ) { octet_($bit = 8);}
+			if ( $3 == 5 ) { octet_($bit = 16);}
+			if ( $3 == 375 ) { octet_($bit = 32);}
+                        if ( $3 == 25 ) { octet_($bit = 64);}
+                        if ( $3 == 125 ) { octet_($bit = 128);}
+		}elsif ( $num =~ /(\d)/ ) {
+			$octet = $1;
+			octet_($bit = 0);
 		}
+
+		print $sub_mask;
+	}
+	if ($8 < 8) {	print "Your slash is less than eight, please try again.";	}
+
+}
+
+
+sub octet_ {
+if ($octet == 1) { 
+	$last = total($_);
+	$sub_mask = "255.$last.0.0";}
+elsif ($octet == 2) {
+	$last = total($_);
+       	$sub_mask = "255.255.$last.0";}
+elsif ($octet == 3) { 
+	$last = total($_);
+	$sub_mask = "255.255.255.$last";}
+else { $sub_mask = "";}
+}
+sub total {
+	if ($bit == 0) {
+		$total_bits = 0;
+	} else {
+	        $total_bits = 256 - $bit;
 	}
 }
 
-if ($octet == 1) { 
-	$last = total($bit);
-	$sub_mask = "255.$last.0.0";
-}
-if ($octet == 2) {
-	$last = total($bit);
-       	$sub_mask = "255.255.$last.0";}
-if ($octet == 3) { 
-	$last = total($bit);
-	$sub_mask = "255.255.255.$last";}
-
-sub total {
-	my $total_bits = $bit ** 2;
-}
-print $sub_mask;
