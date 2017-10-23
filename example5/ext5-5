@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+say "Input any name or words:";
+while (<STDIN>) {
+	chomp;
+	if (/(?<wilma>\b\w+a\b)(?<w>.{0,5})/s) {
+		print "Matched : |$`<$&>$'|\n";
+		print "$+{wilma} $+{w}";
+	}else {
+		print "No match: |$_|\n";
+	}
+}

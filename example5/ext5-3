@@ -1,0 +1,12 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+say "Input any names: ";
+
+while (<STDIN>) {
+	chomp;
+	if (/wilma.*fred|fred.*wilma/) {
+		print;
+	}
+}
