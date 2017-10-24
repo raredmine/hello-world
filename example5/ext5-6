@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+my $file;
+open $file, '<:encoding(UTF-8)', "../../Documents/sample-code/password"
+	or die "Error in $!.";
+
+while (my $row = <$file>) {
+	chomp $row;
+	my @pass = split /:/, $row;
+	print "User:$pass[0] Password:$pass[1]\n";
+
+}
+
+
+my $name ='rODRIGO';
+print "Hello, \U\l$name\E, would you like to play a game?\n";
