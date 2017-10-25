@@ -16,3 +16,5 @@ while (my $row = <$file>) {
 
 my $name ='rODRIGO';
 print "Hello, \U\l$name\E, would you like to play a game?\n";
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

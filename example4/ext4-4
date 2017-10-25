@@ -6,3 +6,5 @@ $_ = "I saw Barney\ndown at the bowling alley\nwith Fred\nlast night.\n";
 if (/Barney.*Fred/s) {
 print "That string mentions Fred after Barney!\n";
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

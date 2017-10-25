@@ -72,3 +72,5 @@ foreach(@arr1) {
         print "Welcome to Perl Language $name";
 }
 
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

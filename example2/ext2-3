@@ -12,3 +12,5 @@ while (<LOG>) {
 	}
 }
 close LOG;
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

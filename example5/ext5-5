@@ -12,3 +12,5 @@ while (<STDIN>) {
 		print "No match: |$_|\n";
 	}
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

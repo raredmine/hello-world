@@ -15,3 +15,5 @@ print "Your full name is $input $name{$input}";
 #while( my ($keys,$values) = each %name){
 #	print "$name{$input}";
 #}
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

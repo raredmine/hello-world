@@ -7,3 +7,5 @@ foreach (<>) {
 chomp;
 print "It was $ARGV that I saw in some stooge-like file!\n";
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

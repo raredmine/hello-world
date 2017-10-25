@@ -10,3 +10,5 @@ while (<STDIN>) {
 		print;
 	}
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

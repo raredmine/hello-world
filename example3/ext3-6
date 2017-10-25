@@ -13,3 +13,5 @@ my (%fname, $name);
 say "Type your name:";
 chomp($name=<STDIN>);
 print "Your family name is $fname{$name}.";
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

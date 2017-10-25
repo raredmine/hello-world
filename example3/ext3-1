@@ -55,3 +55,5 @@ elsif($gender eq 'F' or $gender eq 'f')  {
 else {
 	print "Please input only 'F' or 'f' for Female and 'M' or 'm' for Male.";
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

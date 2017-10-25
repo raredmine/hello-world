@@ -12,3 +12,5 @@ while ( my ($keys,$values) = each %hash) {
 	print "$keys => $values\n";
 }
 print "PATH is $ENV{HOME} $ENV{HOSTNAME}\n";
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

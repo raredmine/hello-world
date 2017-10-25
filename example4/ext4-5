@@ -11,3 +11,5 @@ if ( $ip =~ m/(\d+)(.)(\d+)(.)(\d+)(.)(\d+)\/(\d+)/ ) {
 		print "success";
 	}
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

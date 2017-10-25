@@ -18,3 +18,5 @@ print "$compute\n";
 print "Please input the list of the number you want to add, then press Ctrl-D to end.";
 print &Compute(<STDIN>);
 		
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

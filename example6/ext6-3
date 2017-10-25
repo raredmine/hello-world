@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+use strict;
+
+my $copy = $ARGV[0];
+my $fh;
+
+if (! open $fh, '>>', $copy) {
+	die "can't write '$copy': $!";
+}
+
+print $fh "\n## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.";
+close $fh;
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

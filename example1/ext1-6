@@ -16,3 +16,5 @@ foreach my $key (sort keys %hash) {
 my $value = $hash{$key};
 print "$key => $value\n";
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

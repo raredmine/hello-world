@@ -32,3 +32,6 @@ if (/^\w/m) {
 }else {
 	print $_;
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

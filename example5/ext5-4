@@ -11,3 +11,5 @@ while (<>) {
 		print "No Match: |$_|\n";
 	}
 }
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

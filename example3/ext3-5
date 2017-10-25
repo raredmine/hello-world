@@ -13,3 +13,5 @@ foreach my $env (keys %ENV) {
 	printf "%-${long}s %s\n", $env, $ENV{$env};
 }
 
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

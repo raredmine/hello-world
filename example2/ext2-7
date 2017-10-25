@@ -15,3 +15,5 @@ foreach (@lines) {
 #chomp;
 #print "It was $_ that I saw!\n";
 #}
+
+## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.
