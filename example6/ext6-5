@@ -1,0 +1,11 @@
+#!/usr/bin/perl -w
+## Copyright (c) 20XX by Yours Truly
+use strict;
+
+$_ = "I thought you said Fred and <BOLD>Velma</BOLD>, not <BOLD>Wilma</BOLD>\n";
+$_ =~ s#<BOLD>(.*?)</BOLD>#$1#g;
+print $_;
+
+$_ = "I'm much better\nthan Barney is\nat bowling,\nWilma.\n";
+
+print "Found 'wilma' at start of line\n" if /^wilma\b/im;

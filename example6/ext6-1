@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
-chomp(my $date = `date`);
+chomp(my $date = localtime);#`date`);
 $^I = ".bak";
 while (<>) {
 s/^Author:.*/Author: Randal L. Schwartz/;
@@ -9,5 +9,5 @@ s/^Date:.*/Date: $date/;
 s/^Version:.*/Version: 2.2/;
 print;
 }
-## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.
+
 ## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

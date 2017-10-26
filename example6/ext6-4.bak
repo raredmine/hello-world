@@ -1,0 +1,22 @@
+#!/usr/bin/perl -w
+use strict;
+
+my %do_these;
+foreach (@ARGV) {
+	$do_these{$_} =1;
+}
+
+while (<>) {
+if (/\A## Copyright/) {
+delete $do_these{$ARGV};
+}
+}
+
+@ARGV = sort keys %do_these;
+$^I = ".bak"; # make backups
+while (<>) {
+if (/\A#!/) { # is it the shebang line?
+$_ .= "## Copyright (c) 20XX by Yours Truly\n";
+}
+print;
+}
