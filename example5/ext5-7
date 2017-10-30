@@ -1,0 +1,40 @@
+#!/usr/bin/perl -w
+use strict;
+my ($n, $bit, $first_ip, $last_ip, $net, $bcast);
+
+print "Please input last number:";
+my $last = <STDIN>;
+
+print "Please input bit number:";
+$bit = <STDIN>;
+
+my $bit_ad = $bit;
+
+sub comp {
+if ($_[0] < $bit) {
+	$net = $bit-$bit_ad;
+	$bcast=$bit_ad-1;
+	$last_ip=$bit_ad-2;
+	$first_ip=$net+1;
+}else {
+while($_[0] > $bit) {
+	$bit+=$bit_ad;
+	$last_ip=$bit-2;
+	$net=$bit-$bit_ad;
+	$first_ip=$net+1;
+	$bcast=$bit-1;
+}
+}
+print "Net: $net, Broadcast: $bcast, First and last usable IP: $first_ip and $last_ip\n";
+}
+
+comp($last,$bit);
+
+unless (defined $n) {
+	print "Please input a digit.";
+}elsif ($n < 32 && $n >= 0) {
+	print "Include in line 1.";
+}elsif ($n < 64 && $n >= 32) {
+	print "Include in line 2.";
+	print 2**3;
+}
