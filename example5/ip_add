@@ -11,7 +11,7 @@ $d = '(\d+)';
 if ($ip =~ m/$m$m$m$d\/$d/) {
 	 $num = $5 / 8;
 	($frst, $scnd, $thrd, $frth) = ($1, $2, $3, $4);
-	 if ( $num >= 8 || $num <= 32 ) { 
+	 if ( $num <= 32 ) { 
 		if ( $num =~ /$m$d/ ) {
 			if ( $1 > 3){ $octet = $num;} else{ $octet = $1;}
 			if ( $2 == 875 ) { octet_(2);}
@@ -25,8 +25,7 @@ if ($ip =~ m/$m$m$m$d\/$d/) {
 			$octet = $1;
 			octet_($bit = 0);
 		}
-		print "Network: $network\nBroadcast: $broadcast\nFirst usable IP: $first_ip\nLast usable IP: $last_ip\n";
-		#print "$min $max $sub_mask";
+		print "Network: $network\nBroadcast: $broadcast\nFirst usable IP: $first_ip\nLast usable IP: $last_ip\nSubnet Mask: $sub_mask\n";
 	}
 	if ($5<8 || $5>32) {	print "Your slash is less than eight or greater than 32, please try again.";	}
 
@@ -41,12 +40,20 @@ else {
 
 sub octet_ {
 	$bit=$_[0];
-if ($octet == 1) { 
+if ($octet == 0) {
+	total($frst,$bit);
+        $first_ip = "$net.0.0.1";
+        $last_ip = "$bcast.255.255.254";
+        $broadcast = "$bcast.255.255.255";
+	$sub_mask = "$last_mask.0.0.0";
+        $network = "$net.0.0.0";
+}
+elsif ($octet == 1) { 
 	total($scnd,$bit);
 	$first_ip = "$frst.$net.0.1";
 	$last_ip = "$frst.255.255.$last";
 	$broadcast = "$frst.$bcast.255.255";
-	$sub_mask = "255.$last.0.0";
+	$sub_mask = "255.$last_mask.0.0";
 	$network = "$frst.$net.0.0";
 }
 elsif ($octet == 2) {
@@ -54,7 +61,7 @@ elsif ($octet == 2) {
 	$first_ip = "$frst.$scnd.$first.1";
 	$last_ip = "$frst.$scnd.$bcast.254";
 	$broadcast = "$frst.$scnd.$bcast.255";
-	$sub_mask = "255.255.$last.0";
+	$sub_mask = "255.255.$last_mask.0";
 	$network = "$frst.$scnd.$net.0";
 }
 elsif ($octet == 3) { 
@@ -62,15 +69,12 @@ elsif ($octet == 3) {
 	$first_ip = "$frst.$scnd.$thrd.$first";
 	$last_ip = "$frst.$scnd.$thrd.$last";
 	$broadcast = "$frst.$scnd.$thrd.$bcast";
-	$sub_mask = "255.255.255.$last";
+	$sub_mask = "255.255.255.$last_mask";
 	$network = "$frst.$scnd.$thrd.$net";
 }
 else { $sub_mask = "";}
 }
 sub total {
-	if ($bit == 0) {
-		#$total_bits = 0;
-	} else {
 		$bit_ad = $bit;
                 if ($_[0] < $bit) {
                         $net = $bit-$bit_ad;
@@ -91,9 +95,7 @@ sub total {
                                 $bcast=$bit-1;
                         }
                 }
-		#print "Net: $net, Broadcast: $bcast, First and last usable IP: $first_ip and $last_ip\n";
 		$last_mask = 256 - $bit;
-	}
 }
 
 
