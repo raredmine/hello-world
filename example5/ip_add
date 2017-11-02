@@ -2,7 +2,7 @@
 use strict;
 use 5.010;
 
-my ($ip, $sub_mask, $octet, $num, $m, $d, $bit, $last_mask, $min, $max, $new);
+my ($ip, $sub_mask, $octet, $num, $m, $d, $bit, $last_mask, $min, $max, $new, $broadcast, $network);
 my ($frst, $scnd, $thrd, $frth, $first, $last, $first_ip, $last_ip, $net, $bcast, $bit_ad); 
 say "Input the Network address (Host or Network)";
 $ip =<STDIN>;
@@ -25,7 +25,7 @@ if ($ip =~ m/$m$m$m$d\/$d/) {
 			$octet = $1;
 			octet_($bit = 0);
 		}
-
+		print "Network: $network\nBroadcast: $broadcast\nFirst usable IP: $first_ip\nLast usable IP: $last_ip\n";
 		#print "$min $max $sub_mask";
 	}
 	if ($5<8 || $5>32) {	print "Your slash is less than eight or greater than 32, please try again.";	}
@@ -43,22 +43,33 @@ sub octet_ {
 	$bit=$_[0];
 if ($octet == 1) { 
 	total($scnd,$bit);
+	$first_ip = "$frst.$net.0.1";
+	$last_ip = "$frst.255.255.$last";
+	$broadcast = "$frst.$bcast.255.255";
 	$sub_mask = "255.$last.0.0";
+	$network = "$frst.$net.0.0";
 }
 elsif ($octet == 2) {
 	total($thrd,$bit);
+	$first_ip = "$frst.$scnd.$first.1";
+	$last_ip = "$frst.$scnd.$bcast.254";
+	$broadcast = "$frst.$scnd.$bcast.255";
 	$sub_mask = "255.255.$last.0";
-
+	$network = "$frst.$scnd.$net.0";
 }
 elsif ($octet == 3) { 
 	total($frth,$bit);
+	$first_ip = "$frst.$scnd.$thrd.$first";
+	$last_ip = "$frst.$scnd.$thrd.$last";
+	$broadcast = "$frst.$scnd.$thrd.$bcast";
 	$sub_mask = "255.255.255.$last";
+	$network = "$frst.$scnd.$thrd.$net";
 }
 else { $sub_mask = "";}
 }
 sub total {
 	if ($bit == 0) {
-		$total_bits = 0;
+		#$total_bits = 0;
 	} else {
 		$bit_ad = $bit;
                 if ($_[0] < $bit) {
@@ -66,7 +77,12 @@ sub total {
                         $bcast=$bit_ad-1;
                         $last_ip=$bit_ad-2;
                         $first_ip=$net+1;
-                }else {
+                }elsif ($_[0] % $bit == 0 || $bit % $_[0] == 0) {
+			$net = $_[0];
+			$first = $net+1;
+			$bcast = $_[0]+$bit-1;
+			$last = $bcast-1;
+		}else {
                         while($_[0] > $bit) {
                                 $bit+=$bit_ad;
                                 $last=$bit-2;

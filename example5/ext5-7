@@ -10,6 +10,11 @@ $bit = <STDIN>;
 
 my $bit_ad = $bit;
 
+if ($last % $bit == 0 || $bit % $last == 0) {
+	print "Sucess";
+}
+
+
 sub comp {
 if ($_[0] < $bit) {
 	$net = $bit-$bit_ad;
