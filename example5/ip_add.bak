@@ -3,8 +3,8 @@ use strict;
 use 5.010;
 
 #### Global Variable declare #####
-my ($ip, $sub_mask, $octet, $num, $m, $d, $bites, $last_mask, $min, $max, $new, $broadcast, $network);
-my ($frst, $scnd, $thrd, $frth, $ffth, $first, $last, $first_ip, $last_ip, $net, $bcast, $bites_ad); 
+my ($ip, $sub_mask, $octet, $num, $m, $d, $bit, $last_mask, $min, $max, $new, $broadcast, $network);
+my ($frst, $scnd, $thrd, $frth, $fifth, $first, $last, $first_ip, $last_ip, $net, $bcast, $bit_ad); 
 #### End of Variable declare #####
 
 say "Input the Network address (Host or Network)";
@@ -15,11 +15,10 @@ $d = '(\d+)'; ### Abbreviated Matched digit only.
 
 if ($ip =~ m/$m$m$m$d\/$d/) {
 	 $num = $5 / 8; ##### To get the subnet mask bites, divide the network prefix to 8.
-	($frst, $scnd, $thrd, $frth, $ffth) = ($1, $2, $3, $4, $5); ##### Assigned the list of matched Octet to the Octet Variable.
+	($frst, $scnd, $thrd, $frth, $fifth) = ($1, $2, $3, $4, $5); ##### Assigned the list of matched Octet to the Octet Variable.
 	 if ($5 <= 30) { ##### Conditional for Network Prefix less than or equal 30.
 		if ( $num =~ /$m$d/ ) { ##### Match the digit to separate the decimal to decimal point.
-			if ( $1 > 3){ $octet = $num;} else{ $octet = $1;} ##### To determine the position of last octet for network.
-		##### Start of Bites assigning depend on the Subnet mask in bites or Network Prefix.
+			if ( $1 > 3){ $octet = $num;} else{ $octet = $1;}
 			if ( $2 == 875 ) { octet_(2);}
 			if ( $2 == 75 ) { octet_(4);}
 			if ( $2 == 625 ) { octet_(8);}
@@ -27,13 +26,12 @@ if ($ip =~ m/$m$m$m$d\/$d/) {
 			if ( $2 == 375 ) { octet_(32);}
                         if ( $2 == 25 ) { octet_(64);}
                         if ( $2 == 125 ) { octet_(128);}
-		##### End of Bites assigning.
-		}elsif ( $num =~ /$d/ ) { ##### If the network prefix is divisible by 8.
+		}elsif ( $num =~ /$d/ ) {
 			$octet = $1;
 			octet_(0);
 		}
-		print "Network: $network\/$ffth\nFirst usable IP: $first_ip\nLast usable IP: $last_ip\nBroadcast: $broadcast\nSubnet Mask: $sub_mask\n"; ##### Output Print 
-	}elsif ($5 > 30) { ##### If Network prefix is greater than 30 print try again.
+		print "Network: $network\/$fifth\nFirst usable IP: $first_ip\nLast usable IP: $last_ip\nBroadcast: $broadcast\nSubnet Mask: $sub_mask\n";
+	}elsif ($5 > 30) {	
 		print "Your prefix is greater than 30, please try again.";	
 	}
 
@@ -42,14 +40,14 @@ if ($ip =~ m/$m$m$m$d\/$d/) {
 	$sub_mask =<STDIN>;
 }
 else {
-	print "Please try to input network again. (e.g. 192.168.1.0/24)";
+	print "Error";
 }
 
-###### Start of Subroutine to Assigned the First and Last Usable IP, Broadcast, Subnet Mask and Network address.
+
 sub octet_ {
-	$bites=$_[0];
+	$bit=$_[0];
 if ($octet == 0) {
-	Compute($frst,$bites);
+	total($frst,$bit);
         $first_ip = "$net.0.0.1";
         $last_ip = "$bcast.255.255.254";
         $broadcast = "$bcast.255.255.255";
@@ -57,7 +55,7 @@ if ($octet == 0) {
         $network = "$net.0.0.0";
 }
 elsif ($octet == 1) { 
-	Compute($scnd,$bites);
+	total($scnd,$bit);
 	$first_ip = "$frst.$net.0.1";
 	$last_ip = "$frst.$bcast.255.254";
 	$broadcast = "$frst.$bcast.255.255";
@@ -65,7 +63,7 @@ elsif ($octet == 1) {
 	$network = "$frst.$net.0.0";
 }
 elsif ($octet == 2) {
-	Compute($thrd,$bites);
+	total($thrd,$bit);
 	$first_ip = "$frst.$scnd.$net.1";
 	$last_ip = "$frst.$scnd.$bcast.254";
 	$broadcast = "$frst.$scnd.$bcast.255";
@@ -73,7 +71,7 @@ elsif ($octet == 2) {
 	$network = "$frst.$scnd.$net.0";
 }
 elsif ($octet == 3) { 
-	Compute($frth,$bites);
+	total($frth,$bit);
 	$first_ip = "$frst.$scnd.$thrd.$first";
 	$last_ip = "$frst.$scnd.$thrd.$last";
 	$broadcast = "$frst.$scnd.$thrd.$bcast";
@@ -82,14 +80,11 @@ elsif ($octet == 3) {
 }
 else { $sub_mask = "";}
 }
-##### End of the Subroutine Octet
-
-##### Start of Subroutine for Computation.
-sub Compute {
+sub total {
 	
-	$bites_ad = $bites;
+	$bit_ad = $bit;
 	
-	if ($bites == 0) { ##### Fix length Subnet Masking - e.g. Class A, B and C 
+	if ($bit == 0) { ##### Fix length Subnet Masking - e.g. Class A, B and C 
 		if ($octet == 3) { ##### For last Octet of IP Address. 
 			$first = 1;
 			$last = 254;
@@ -100,28 +95,27 @@ sub Compute {
 		$net = 0;
 		$last_mask = 0;
 	}else{	##### Variable Length Subnet Masking - Modify the Prefix Length based on the subnets and Hosts requirement.
-		if ($_[0] < $bites) {  ##### If last Octet of Network is less than Subnet mask in bites.
-                        $net = $bites - $bites_ad;
-                        $bcast = $bites_ad - 1;
+		if ($_[0] < $bit) {  ##### If last Octet of Network is less than Subnet mask in bites.
+                        $net = $bit - $bit_ad;
+                        $bcast = $bit_ad - 1;
 			$first = $net + 1;
 			$last = $bcast - 1;
-			$last_mask = 256 - $bites;
-		}elsif ($_[0] % $bites == 0 || $bites % $_[0] == 0) { ##### if last Octet of Network is divisible by Subnet mask in bites or vice versa.  
+			$last_mask = 256 - $bit;
+		}elsif ($_[0] % $bit == 0 || $bit % $_[0] == 0) { ##### if last Octet of Network is divisible by Subnet mask in bites or vice versa.  
 			$net = $_[0];
 			$first = $net + 1;
-			$bcast = $_[0] + $bites - 1;
+			$bcast = $_[0] + $bit - 1;
 			$last = $bcast - 1;
-			$last_mask = 256 - $bites;
+			$last_mask = 256 - $bit;
 		}else { ##### Other Condition will be use with while to continue increase of bites.
-                        while($_[0] > $bites) { ##### Used While loop to get the value of last Octet for Network.
-                                $bites += $bites_ad;
-                                $net = $bites - $bites_ad;
-				$bcast = $bites - 1;
-				$last_mask = 256 - $bites_ad;
+                        while($_[0] > $bit) { ##### Used While loop to get the value of last Octet for Network.
+                                $bit += $bit_ad;
+                                $net = $bit - $bit_ad;
+				$bcast = $bit - 1;
+				$last_mask = 256 - $bit_ad;
                         }
                 }
 	}
 }
-##### End of Subroutine Computation.
 
 ## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.
