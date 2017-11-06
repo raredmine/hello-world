@@ -4,7 +4,7 @@ use 5.010;
 
 #### Global Variable declare #####
 my ($ip, $sub_mask, $octet, $num, $m, $d, $bites, $last_mask, $min, $max, $new, $broadcast, $network);
-my ($frst, $scnd, $thrd, $frth, $ffth, $first, $last, $first_ip, $last_ip, $net, $bcast, $bites_ad); 
+my ($frst, $scnd, $thrd, $frth, $ffth, $first, $last, $first_ip, $last_ip, $net, $bcast, $bites_ad);
 #### End of Variable declare #####
 
 say "Input the Network address (Host or Network)";
@@ -38,10 +38,35 @@ if ($ip =~ m/$m$m$m$d\/$d/) {
 	}
 
 }elsif ($ip =~ m/$m$m$m$d/) {
-	say "Input the Subnet Mask (e.g. 255.255.255.0)";
-	$sub_mask =<STDIN>;
-}
-else {
+	say "A. Firts Byte\nB. Second Byte\nC. Third Byte\nD. Fourth Byte";
+	print "Choose letter above to what Class you want for subnet mask: ";
+	my $opt_B =<STDIN>;
+			my ($count, $zero, $blocks, $char, $join) = (0,0,255,"A");
+			my %hash;
+			my @bit = (255,254,252,248,240,224,192,128);
+			foreach (@bit){
+				$count++;
+				if ($opt_B =~ /\ba\b/i){				
+					$join = join ".", $_,$zero,$zero,$zero;
+				}elsif ($opt_B =~ /\bb\b/i){
+					$join = join ".", $blocks,$_,$zero,$zero;
+				}elsif ($opt_B =~ /\bc\b/i){
+					$join = join ".", $blocks,$blocks,$_,$zero;
+				}elsif ($opt_B =~ /\bd\b/i){
+                                        $join = join ".", $blocks,$blocks,$blocks,$_;
+				}
+				if ($count == 5) {
+					print "\n";
+				}
+				$hash{$char}=$join;
+				print "$char. $join\t";
+				$char++;
+			}
+	print "\nChoose letter above for Subnet Mask: ";
+	chomp (my $opt_S = <STDIN>);
+	my $opt_U = uc $opt_S;
+	print $hash{$opt_U};
+}else {
 	print "Please try to input network again. (e.g. 192.168.1.0/24)";
 }
 
