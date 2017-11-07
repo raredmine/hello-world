@@ -49,7 +49,7 @@ $sub_mask = $sub_mask{$ffth};
 }
 
 print "Network: $network\/$ffth\nFirst usable IP: $first_ip\nLast usable IP: $last_ip
-Broadcast: $broadcast\nSubnet Mask: $sub_mask\nMax Subnet: $max_sub\nMax IP Address: $max_ip"; ##### Output Print
+Broadcast: $broadcast\nSubnet Mask: $sub_mask\nMaximum Subnets: $max_sub\nMaximum IP Addresses: $max_ip"; ##### Output Print
 
 ##### Start of Subroutine for creating Array of Subnet Mask
 sub sub_mask_ {
