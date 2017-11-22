@@ -42,7 +42,7 @@ if ($ip =~ m/$m$m$m$d\/$d/) {
 		$count++;
 	}
 	
-print "\nChoose number above for subnet mask: ";
+print "\nChoose number above for subnet mask 1 to 30: ";
 chomp($ffth =<STDIN>);
 $sub_mask = $sub_mask{$ffth};
 	prefix_($ffth);

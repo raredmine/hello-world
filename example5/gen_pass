@@ -4,30 +4,56 @@ use List::Util qw(shuffle);
 use 5.010;
 
 print randStr(8)."\n";
-sub randStr {
-    return join('', map{ ('a'..'z','A'..'Z',0..9, '_' )[rand 62]} 0..$_[0]);
-}
+#sub randStr {
+#    return join('', map{ ( )[rand 63]} 0..$_[0]);
+#}
 
 
 #my @shuffled = shuffle(1..10);
 
-my $rand = map {('a'..'z')[rand 62]} 0..8;
+#my $rand = map {('a'..'z')[rand 26]} 0..8;
 
-print $rand;
+#print $rand;
 #print @shuffled;
 
 #print "Some powers of two are:\n",
 #map "\t" . ( 2 ** $_ ) . "\n", 0..32;
 
 srand( time() ^ ($$ + ($$ << 15)) );
-#print rand(6);
-my @v = qw ( a e i o u y );
-my @c = qw ( b c d f g h j k l m n p q r s t v w x z );
-
-for (1..12) {
-    my ($flip, $str) = (0,'');
-    $str .= ($flip++ % 2) ? $v[rand(6)] : $c[rand(20)] for 1 .. 9;
-    $str =~ s/(....)/$1 . int rand(10)/e;
-    $str = ucfirst $str if rand() > 0.5;
-    print "$str\n";
+#print "\n$$ ";
+#print time();
+if (5 ^ 6){
+	print "true $$\n";
+	print 2 << 4;
 }
+else{ print "false";}
+
+my @lc = ('a'..'z');
+my @uc = ('A'..'Z');
+my @num = (0..9);
+my @sym = ('!','@','#','$','%','^','&','*','_','+','-','?');
+my @amb = ('{','}','[',']','(',')','/','\\','\'','"','~','`','\,',';',':','.','<','>');
+my @sim = ('i','l','L','o',0,'O');
+print "\n", $lc[rand(26)], $num[rand(10)], $uc[rand(26)], $sym[rand(12)], $amb[rand(18)];
+
+
+print randStr(8)."\n";
+
+foreach (@lc,@uc,@num,@sym,@amb,@sim) {
+	my @sum .=$_;
+	print $sum;
+}
+
+
+sub randStr {
+    return join('', map{ ( )[rand 63]} 1..10);
+}
+
+
+#for (1..12) {
+#    my ($flip, $str) = (0,'');
+#    $str .= ($flip++ % 2) ? $v[rand(6)] : $c[rand(20)] for 1 .. 9;
+#    $str =~ s/(....)/$1 . int rand(10)/e;
+#    $str = ucfirst $str if rand() > 0.5;
+#    print "$str\n";
+#}

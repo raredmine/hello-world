@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+use strict;
+
+spliturl('http://testing.com:8090/helo');
+sub spliturl {
+  my $url      = shift;
+  my $protocol = "";
+  my $address  = "";
+  my $port     = "";
+  my $path     = "";
+  $url =~ /^([^\/:]+):\/\/([^\/:]+)(:\d*)?(.*)/;
+  $protocol = $1 if(defined($1));
+  $address  = $2 if(defined($2));
+  $port     = $3 if(defined($3));
+  $path     = $4 if(defined($4));
+  print "$protocol,$address,$port,$path";
+  return($protocol,$address,$port,$path);
+}
+
