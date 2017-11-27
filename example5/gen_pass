@@ -3,57 +3,52 @@ use strict;
 use List::Util qw(shuffle);
 use 5.010;
 
-print randStr(8)."\n";
-#sub randStr {
-#    return join('', map{ ( )[rand 63]} 0..$_[0]);
-#}
+my (@_2comb, @_3comb, @_4comb, @_5comb, @_6comb, @lc, @uc, @num, @sym, @amb, @sim, @sum);
+$_ = 'X' for my ($uc_lc, $uc_uc, $uc_num, $uc_sym, $uc_amb);
 
+@lc = ('a'..'z');
+@uc = ('A'..'Z');
+@num = (0..9);
+@sym = ('!','@','#','$','%','^','&','*','_','+','-','?');
+@amb = ('{','}','[',']','(',')','/','\\','\'','"','~','`','\,',';',':','.','<','>');
+@sim = ('i','l','L','o',0,'O');
 
-#my @shuffled = shuffle(1..10);
+#$lc[rand(26)];
 
-#my $rand = map {('a'..'z')[rand 26]} 0..8;
+my @pass=shuffle(1..10);
+say @pass;
 
-#print $rand;
-#print @shuffled;
-
-#print "Some powers of two are:\n",
-#map "\t" . ( 2 ** $_ ) . "\n", 0..32;
-
-srand( time() ^ ($$ + ($$ << 15)) );
-#print "\n$$ ";
-#print time();
-if (5 ^ 6){
-	print "true $$\n";
-	print 2 << 4;
+while(1) {
+say "Select character by entering name or 'all'. Deselect\ncharacter by prepending a '-', e.g. -lower*.\nSelected character are labeled '[X]'.";
+say "[$uc_lc] lower case\t[$uc_uc] upper case\t[$uc_amb] ambigous character\n[$uc_sym] symbolic\t[$uc_num] number"; 
+print "Select Character(s)? or ( 'quit' or 'done') ";
+my $opt = <STDIN>;
+if ($opt =~ /-lower\*( case)?/) {
+	$uc_lc=' ';
+}elsif ($opt =~ /-upper\*( case)?/){
+	$uc_uc=' ';
+}elsif ($opt =~ /-ambigous*( character)?/){
+	$uc_amb=' ';
+}elsif ($opt =~ /-symbolic/){
+	$uc_sym=' ';
+}elsif ($opt =~ /-number/){
+	$uc_num=' ';
+}elsif ($opt =~/\ball\b/){
+	$_ = 'X' for ($uc_lc, $uc_uc, $uc_amb, $uc_sym, $uc_num);	
+}elsif ($opt =~/quit|exit/){
+	exit 1;
+}elsif ($opt =~/done/){
+	if ($uc_lc eq 'X') {
+		push @sum, @lc;
+	}elsif ($uc_uc eq 'X') {
+		push @sum, @uc;
+	}elsif ($uc_num eq 'X') {
+		push @sum, @num;
+	}elsif ($uc_amb eq 'X') {
+		push @sum, @amb;
+	}elsif ($uc_sym eq 'X') {
+		push @sum, @sym;
+	}
 }
-else{ print "false";}
-
-my @lc = ('a'..'z');
-my @uc = ('A'..'Z');
-my @num = (0..9);
-my @sym = ('!','@','#','$','%','^','&','*','_','+','-','?');
-my @amb = ('{','}','[',']','(',')','/','\\','\'','"','~','`','\,',';',':','.','<','>');
-my @sim = ('i','l','L','o',0,'O');
-print "\n", $lc[rand(26)], $num[rand(10)], $uc[rand(26)], $sym[rand(12)], $amb[rand(18)];
-
-
-print randStr(8)."\n";
-
-foreach (@lc,@uc,@num,@sym,@amb,@sim) {
-	my @sum .=$_;
-	print $sum;
+print @sum;
 }
-
-
-sub randStr {
-    return join('', map{ ( )[rand 63]} 1..10);
-}
-
-
-#for (1..12) {
-#    my ($flip, $str) = (0,'');
-#    $str .= ($flip++ % 2) ? $v[rand(6)] : $c[rand(20)] for 1 .. 9;
-#    $str =~ s/(....)/$1 . int rand(10)/e;
-#    $str = ucfirst $str if rand() > 0.5;
-#    print "$str\n";
-#}

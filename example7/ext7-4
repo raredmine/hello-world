@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+use strict;
+
+my $Debug = defined $ENV{DEBUG} ? $ENV{DEBUG} : 1;
+my $num = int(1 + rand 100);
+while (1) {
+print "Guest the correct random number.";	
+chomp (my $guest=<STDIN>);
+
+#if ($guest=='quit' or $guest=='exit' or $guest=''){
+ if ($guest =~ /quit|exit|\A\s*\z/i)  {      
+	print "User quit the program.";
+                last;
+        }
+
+	elsif ($guest == $num) {
+		print "Success";
+		exit 1;
+	}elsif ($num > $guest) {
+		print "Too low.\n";
+		redo;
+	}elsif ($num < $guest) {
+		print "Too high.\n";
+		redo;
+	}
+}
+

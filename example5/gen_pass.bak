@@ -1,0 +1,66 @@
+#!/usr/bin/perl -w
+use strict;
+use List::Util qw(shuffle);
+use 5.010;
+
+print randStr(8)."\n";
+#sub randStr {
+#    return join('', map{ ( )[rand 63]} 0..$_[0]);
+#}
+
+
+my @shuffled = shuffle(1..10);
+
+#my $rand = map {('a'..'z')[rand 26]} 0..8;
+
+#print $rand;
+say "@shuffled";
+
+#print "Some powers of two are:\n",
+#map "\t" . ( 2 ** $_ ) . "\n", 0..32;
+
+srand( time() ^ ($$ + ($$ << 15)) );
+#print "\n$$ ";
+#print time();
+if (5 ^ 6){
+	print "true $$\n";
+	print 2 << 4;
+}
+else{ print "false";}
+
+my @lc = ('a'..'z');
+my @uc = ('A'..'Z');
+my @num = (0..9);
+my @sym = ('!','@','#','$','%','^','&','*','_','+','-','?');
+my @amb = ('{','}','[',']','(',')','/','\\','\'','"','~','`','\,',';',':','.','<','>');
+my @sim = ('i','l','L','o',0,'O');
+print "\n", $lc[rand(26)], $num[rand(10)], $uc[rand(26)], $sym[rand(12)], $amb[rand(18)];
+
+print randStr(8)."\n";
+
+my @sum = @lc;
+push @sum, @uc;
+push @sum, @num;
+print @sum;
+
+sub randStr {
+    return join('', map{ ( )[rand 63]} 1..10);
+}
+
+
+#for (1..12) {
+#    my ($flip, $str) = (0,'');
+#    $str .= ($flip++ % 2) ? $v[rand(6)] : $c[rand(20)] for 1 .. 9;
+#    $str =~ s/(....)/$1 . int rand(10)/e;
+#    $str = ucfirst $str if rand() > 0.5;
+#    print "$str\n";
+#}
+
+#print "Please input number as size.";
+#my $width=<STDIN>;
+#my $size =
+#($width < 10) ? "small" :
+#($width < 20) ? "medium" :
+#($width < 50) ? "large" :
+#"extra-large";
+#print $size;
