@@ -3,20 +3,20 @@ use strict;
 use List::Util qw(shuffle);
 use 5.010;
 
-my (@_2comb, @_3comb, @_4comb, @_5comb, @_6comb, @lc, @uc, @num, @sym, @amb, @sim, @sum);
+my (@_2comb, @_3comb, @_4comb, @_5comb, @_6comb, @lc, @uc, @num, @sym, @amb, @sim, @sum, @pass);
 $_ = 'X' for my ($uc_lc, $uc_uc, $uc_num, $uc_sym, $uc_amb);
 
 @lc = ('a'..'z');
 @uc = ('A'..'Z');
 @num = (0..9);
 @sym = ('!','@','#','$','%','^','&','*','_','+','-','?');
-@amb = ('{','}','[',']','(',')','/','\\','\'','"','~','`','\,',';',':','.','<','>');
+@amb = ('{','}','[',']','(',')','/','\\','\'','"','~','`',',',';',':','.','<','>');
 @sim = ('i','l','L','o',0,'O');
 
 #$lc[rand(26)];
 
-my @pass=shuffle(1..10);
-say @pass;
+#my @pass=shuffle(1..10);
+#say @pass;
 
 while(1) {
 say "Select character by entering name or 'all'. Deselect\ncharacter by prepending a '-', e.g. -lower*.\nSelected character are labeled '[X]'.";
@@ -38,17 +38,28 @@ if ($opt =~ /-lower\*( case)?/) {
 }elsif ($opt =~/quit|exit/){
 	exit 1;
 }elsif ($opt =~/done/){
-	if ($uc_lc eq 'X') {
-		push @sum, @lc;
-	}elsif ($uc_uc eq 'X') {
-		push @sum, @uc;
-	}elsif ($uc_num eq 'X') {
-		push @sum, @num;
-	}elsif ($uc_amb eq 'X') {
-		push @sum, @amb;
-	}elsif ($uc_sym eq 'X') {
-		push @sum, @sym;
-	}
+	push @sum, @lc, push @pass, $lc[rand(26)] if $uc_lc eq 'X';
+	push @sum, @uc, push @pass, $uc[rand(26)] if $uc_uc eq 'X';
+	push @sum, @num, push @pass, $num[rand(10)] if $uc_num eq 'X';
+	push @sum, @amb, push @pass, $amb[rand(18)] if $uc_amb eq 'X';
+	push @sum, @sym, push @pass, $sym[rand(12)] if $uc_sym eq 'X';
+	#last;
+
+print "Type the size of your password, minimum of 8: ";
+chomp(my $opt_num = <STDIN>);
+
+if ($opt_num < 8) {
+        print "Please type 8 or greater: ";
+}else {
+
+foreach (2..($opt_num-$#pass)) {
+        push @pass, $sum[rand($#sum)];
 }
-print @sum;
+say "Generated Password:\t", shuffle(@pass);
+@pass = undef;
+$pass[0] = $sum[rand($#sum)];
+
+}
+}
+
 }
