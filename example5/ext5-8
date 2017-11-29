@@ -1,0 +1,11 @@
+#!/usr/bin/perl -w
+use strict;
+    sub func ($) {
+	my $n = shift;
+	print "you gave me $n\n";
+    }
+	
+    my @foo = qw /  test test 1 2 sample /;	
+    func(@foo);
+    func(my $text =~ /\w+/g );
+    func(my $t="testi");
