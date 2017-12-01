@@ -1,0 +1,20 @@
+#!/usr/bin/perl -w
+use strict;
+use 5.010;
+
+say 'Welcome to my simple Perl Script.';
+print "1. Generated Password\n2. IP Subnet Calculator.\n3. Quit\n";
+print "Please select what tools you want by: ";
+chomp (my $opt = <STDIN>);
+
+if ($opt =~ /\d+/) {
+	if ($opt == 1) {
+		require 'gen_pass';
+	}elsif ($opt == 2) {
+		require 'ip_add';
+	}else{
+		exit;
+	}
+}
+
+ 

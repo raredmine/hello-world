@@ -8,20 +8,22 @@ my ($frst, $scnd, $thrd, $frth, $ffth, $first, $last, $first_ip, $last_ip, $net,
 my (%sub_mask,@prefix);
 #### End of Variable declare #####
 
-say "Input the Network address (Host or Network)";
+while (1) {
+print "Input the Network address (Host or Network) ";
 $ip =<STDIN>;
 
 $m =  '(\d+)\.'; ### Abbreviated the Matched digit with dotted.
 $d = '(\d+)'; ### Abbreviated Matched digit only.
 
+
 if ($ip =~ m/$m$m$m$d\/$d/) {
 	($frst, $scnd, $thrd, $frth, $ffth) = ($1, $2, $3, $4, $5); ##### Assigned the list of matched Octet to the Octet Variable.
-
+	redo if ($1 > 255);
 	prefix_($ffth);
 	
 }elsif ($ip =~ m/$m$m$m$d/) {
 	 ($frst, $scnd, $thrd, $frth) = ($1, $2, $3, $4); ##### Assigned the list of matched Octet to the Octet Variable.
-	
+	redo if ($1 > 255);
 	sub_mask_('a');
 	sub_mask_('b');
 	sub_mask_('c');
@@ -47,7 +49,7 @@ chomp($ffth =<STDIN>);
 $sub_mask = $sub_mask{$ffth};
 	prefix_($ffth);
 }else {
-	print "Please try to input network again. (e.g. 192.168.1.0/24)";
+	say "Please try to input network again. (e.g. 192.168.1.0/24)";
 }
 
 ##### Start of Subroutine for creating Array of Subnet Mask
@@ -69,11 +71,15 @@ sub sub_mask_ {
         }
 
 }
+
+}
+
 ##### End of Subroutine
 
 
 ##### Start of Subroutine of Network Prefix  
 sub prefix_ {
+	
 	$num = $_[0] / 8;
 	if ($_[0] <= 30) { ##### Conditional for Network Prefix less than or equal 30.
                 if ( $num =~ /$m$d/ ) { ##### Match the digit to separate the decimal to decimal point.
@@ -93,8 +99,8 @@ sub prefix_ {
                 }
 	
 print "Network: $network\/$ffth\nFirst usable IP: $first_ip\nLast usable IP: $last_ip
-Broadcast: $broadcast\nSubnet Mask: $sub_mask\nMaximum Subnets: $max_sub\nMaximum IP Addresses: $max_ip"; ##### Output Print
-
+Broadcast: $broadcast\nSubnet Mask: $sub_mask\nMaximum Subnets: $max_sub\nMaximum IP Addresses: $max_ip\n"; ##### Output Print
+undef @prefix;
 
 	}else { ##### If Network prefix is greater than 30 print try again.
 		print "Your prefix is greater than 30, please try again.";
@@ -149,7 +155,6 @@ elsif ($octet == 3) {
 	$max_ip = $max_sub - 2;
 }
 else { $sub_mask = "";}
-
 }
 ##### End of the Subroutine Octet
 
@@ -193,6 +198,5 @@ sub Compute_ {
 	}
 }
 ##### End of Subroutine Computation.
-
 
 ## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.

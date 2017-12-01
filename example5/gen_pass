@@ -48,18 +48,24 @@ if ($opt =~ /-lower\*( case)?/) {
 print "Type the size of your password, minimum of 8: ";
 chomp(my $opt_num = <STDIN>);
 
-if ($opt_num < 8) {
-        print "Please type 8 or greater: ";
-}else {
+if ($opt_num =~ /\d+/) {
+	if ($opt_num < 8) {
+        	say "Please type 8 or greater: ";
+		undef @sum;
+		undef @pass;
+	}else {
 
-foreach (2..($opt_num-$#pass)) {
-        push @pass, $sum[rand($#sum)];
-}
-say "Generated Password:\t", shuffle(@pass);
-@pass = undef;
-$pass[0] = $sum[rand($#sum)];
+		foreach (2..($opt_num-$#pass)) {
+        		push @pass, $sum[rand($#sum)];
+		}
+	say "\nPASSWORD:\t", shuffle(@pass), "\n";
 
-}
-}
+	
+	undef @pass;
+
+	undef @sum;
+	}
+		}
+	}
 
 }
