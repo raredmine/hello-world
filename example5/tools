@@ -9,9 +9,9 @@ chomp (my $opt = <STDIN>);
 
 if ($opt =~ /\d+/) {
 	if ($opt == 1) {
-		require 'gen_pass';
+		do 'gen_pass';
 	}elsif ($opt == 2) {
-		require 'ip_add';
+		do 'ip_add';
 	}else{
 		exit;
 	}

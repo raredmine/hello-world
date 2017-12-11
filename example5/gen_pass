@@ -36,7 +36,7 @@ if ($opt =~ /-lower\*( case)?/) {
 }elsif ($opt =~/\ball\b/){
 	$_ = 'X' for ($uc_lc, $uc_uc, $uc_amb, $uc_sym, $uc_num);	
 }elsif ($opt =~/quit|exit/){
-	exit 1;
+	do 'tools';
 }elsif ($opt =~/done/){
 	push @sum, @lc, push @pass, $lc[rand(26)] if $uc_lc eq 'X';
 	push @sum, @uc, push @pass, $uc[rand(26)] if $uc_uc eq 'X';

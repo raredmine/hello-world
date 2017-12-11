@@ -15,15 +15,16 @@ $ip =<STDIN>;
 $m =  '(\d+)\.'; ### Abbreviated the Matched digit with dotted.
 $d = '(\d+)'; ### Abbreviated Matched digit only.
 
+do 'tools' if ($ip =~ /quit|exit/);
 
 if ($ip =~ m/$m$m$m$d\/$d/) {
 	($frst, $scnd, $thrd, $frth, $ffth) = ($1, $2, $3, $4, $5); ##### Assigned the list of matched Octet to the Octet Variable.
-	redo if ($1 > 255);
+	say "Please provide a valid IP Address"; redo if ($1 > 255);
 	prefix_($ffth);
 	
 }elsif ($ip =~ m/$m$m$m$d/) {
 	 ($frst, $scnd, $thrd, $frth) = ($1, $2, $3, $4); ##### Assigned the list of matched Octet to the Octet Variable.
-	redo if ($1 > 255);
+	say "Please provide a valid IP Address"; redo if ($1 > 255);
 	sub_mask_('a');
 	sub_mask_('b');
 	sub_mask_('c');
