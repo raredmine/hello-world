@@ -1,0 +1,27 @@
+#!/usr/bin/perl -w
+
+usage() if (@ARGV != 3);
+
+my ($config, $user, $pass) = @ARGV;
+
+if ($< !=0) {
+	print 'Error';
+}
+
+if (!-d $config) {
+	print STDERR "The config directory $config does not exist\n";
+	exit 2;
+	}
+
+sub usage
+{
+print STDERR <<EOF;
+usage: changepass.pl <config-dir> <login> <password>
+This program allows you to change the password of a user in the Webmin
+password file. For example, to change the password of the admin user
+to foo, you would run:
+	changepass.pl /etc/webmin admin foo
+This assumes that /etc/webmin is the Webmin configuration directory.
+EOF
+exit 1;
+}
