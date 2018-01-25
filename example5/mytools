@@ -8,6 +8,21 @@ my ($frst, $scnd, $thrd, $frth, $ffth, $first, $last, $first_ip, $last_ip, $net,
 my (%sub_mask,@prefix);
 #### End of Variable declare #####
 
+say 'Welcome to my simple Perl Script.';
+print "1. Generated Password\n2. IP Subnet Calculator.\n3. Quit\n";
+print "Please select what tools you want by: ";
+chomp (my $opt = <STDIN>);
+
+if ($opt =~ /\d+/) {
+        if ($opt == 1) {
+                do 'gen_pass';
+        }elsif ($opt == 2) {
+                do 'ip_add';
+        }else{
+                exit;
+        }
+}
+
 while (1) {
 print "Input the Network address (Host or Network) ";
 $ip =<STDIN>;

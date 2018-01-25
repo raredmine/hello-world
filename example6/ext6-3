@@ -1,14 +1,23 @@
 #!/usr/bin/perl -w
 use strict;
 
+error() if (!$ARGV[0]);
+
 my $copy = $ARGV[0];
 my $fh;
 
-if (! open $fh, '>>', $copy) {
-	die "can't write '$copy': $!";
+if (!open $fh, '>>', $copy) {
+	print STDERR "can't write to file '$copy': $!";
+	exit 2;
 }
 
-print $fh "\n## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.";
+print $fh "\n## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.\n";
 close $fh;
 
-## Copyright (C) 2017 by Rodrigo D. Adolfo Jr.
+sub error
+{
+print STDERR <<EOF;
+Please try again.
+EOF
+exit 1;
+}
